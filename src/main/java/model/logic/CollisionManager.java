@@ -93,6 +93,7 @@ public class CollisionManager {
 	                if (currentbonus instanceof Coin) {
 	                    character.setScore(character.getScore() + ((Coin) currentbonus).getVALUE());
 	                    gameObjects.remove(currentbonus);
+                        GameEngine.getInstance().reportBonusCollected(currentbonus.getId());
 	                    Map.getInstance().extraPoints();
 	                }
 	                //if the bonus is a balloon, character goes up easily for a while with the balloon
@@ -109,17 +110,20 @@ public class CollisionManager {
 
                         if(((Balloon)currentbonus).isPassed(Map.getInstance().getAltitude(), 60)){
                                 gameObjects.remove(currentbonus);
+                                GameEngine.getInstance().reportBonusCollected(currentbonus.getId());
                             }
                      //if the bonus is a timestretcher, the game screen speed decreases for a while
                     } else if (currentbonus instanceof TimeStretcher) {
 
                         gameObjects.remove(currentbonus);
+                        GameEngine.getInstance().reportBonusCollected(currentbonus.getId());
                         GameEngine.getInstance().decreaseGameSpeed();
                         GameEngine.getInstance().setPrevBarDecreaseGameSpeed(prevBarId);
 
                      //if the bonus is a timesqueezer, the game screen increases for a while
                     } else if (currentbonus instanceof TimeSqueezer) {
                         gameObjects.remove(currentbonus);
+                        GameEngine.getInstance().reportBonusCollected(currentbonus.getId());
                         GameEngine.getInstance().increaseGameSpeed();
                         GameEngine.getInstance().setPrevBarIncreaseGameSpeed(prevBarId);
 
@@ -128,6 +132,7 @@ public class CollisionManager {
 
                         Map.getInstance().extendBar(prevBarId);
                         gameObjects.remove(currentbonus);
+                        GameEngine.getInstance().reportBonusCollected(currentbonus.getId());
                     }
 	            }
 	        }

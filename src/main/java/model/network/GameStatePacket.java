@@ -13,6 +13,7 @@ public class GameStatePacket implements Serializable {
     public boolean movingLeft, movingRight, standing, comboJumping;
     public boolean barExtendTaken;
     public int barExtendTakenBar;
+    public java.util.ArrayList<Integer> collectedBonuses = new java.util.ArrayList<>();
     public long seed; // Only sent by host initially
     public boolean isInit; // Flag to check if it's init packet
 

@@ -183,6 +183,8 @@ public class Map {
 	}
 
     public void reset(long seed) {
+        Bar.resetId();
+        Collectible.resetId();
         this.rand = new Random(seed);
         this.gameObjects.clear();
         this.gameObjects.add(gameCharacter);
@@ -568,4 +570,17 @@ public class Map {
 	public int getBarExtendTakenBar(){
 		return barExtendTakenBar;
 	}
+
+    public void removeCollectible(int id) {
+        Iterator<GameObject> iter = gameObjects.iterator();
+        while (iter.hasNext()) {
+            GameObject obj = iter.next();
+            if (obj instanceof Collectible) {
+                if (((Collectible) obj).getId() == id) {
+                    iter.remove();
+                    return;
+                }
+            }
+        }
+    }
 }

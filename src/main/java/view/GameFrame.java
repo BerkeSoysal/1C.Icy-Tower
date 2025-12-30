@@ -193,6 +193,7 @@ public class GameFrame {
                 myPacket.comboJumping = myChar.isComboJumping();
                 myPacket.barExtendTaken = Map.getInstance().isBarExtendTaken();
                 myPacket.barExtendTakenBar = Map.getInstance().getBarExtendTakenBar();
+                myPacket.collectedBonuses.addAll(GameEngine.getInstance().getAndClearRecentlyCollectedBonuses());
                 // Check if I died
                 if (GameEngine.getInstance().getMap().gameOver()) {
                     myPacket.isDead = true;
@@ -209,6 +210,12 @@ public class GameFrame {
                         if (remotePacket.barExtendTaken) {
                             if (!Map.getInstance().isBarExtendTaken() || remotePacket.barExtendTakenBar > Map.getInstance().getBarExtendTakenBar()) {
                                 Map.getInstance().extendBar(remotePacket.barExtendTakenBar);
+                            }
+                        }
+
+                        if (remotePacket.collectedBonuses != null) {
+                            for (Integer id : remotePacket.collectedBonuses) {
+                                Map.getInstance().removeCollectible(id);
                             }
                         }
 

@@ -51,6 +51,21 @@ public class GameEngine {
 
 	private boolean decreaseGameSpeed;
 
+    private java.util.concurrent.ConcurrentLinkedQueue<Integer> recentlyCollectedBonuses = new java.util.concurrent.ConcurrentLinkedQueue<>();
+
+    public void reportBonusCollected(int id) {
+        recentlyCollectedBonuses.add(id);
+    }
+
+    public java.util.List<Integer> getAndClearRecentlyCollectedBonuses() {
+        java.util.List<Integer> list = new java.util.ArrayList<>();
+        Integer id;
+        while ((id = recentlyCollectedBonuses.poll()) != null) {
+            list.add(id);
+        }
+        return list;
+    }
+
 	public boolean isIncreaseGameSpeed() {
 		return increaseGameSpeed;
 	}
@@ -252,6 +267,7 @@ public class GameEngine {
 		//map.changeImages();
 		if(Map.getInstance().gameOver()){
 	    	Bar.resetId();
+            Collectible.resetId();
 			createGameOverPane();
 			return pane;
 		}
