@@ -55,6 +55,9 @@ public class Map {
 	 */
 	private Character gameCharacter;
 
+	private Character opponentCharacter;
+	private boolean isMultiplayer;
+
 	/**
 	 * The number of levels that created by Map Generator so far
 	 */
@@ -136,6 +139,82 @@ public class Map {
         barExtendTakenBar=0;
 
         collisionManager = new CollisionManager(gameObjects);
+	}
+
+	public void initMultiplayer(boolean host) {
+		isMultiplayer = true;
+		opponentCharacter = new Character();
+		opponentCharacter.setPosX(CHARACTER_INITIAL_POSX + 50); // Offset slightly
+		opponentCharacter.setPosY(CHARACTER_INITIAL_POSY);
+		// Assuming default images are available or will be set.
+		// For now, let's try to set some images if possible, otherwise it might be invisible until update
+		// We'll update opponent images in GameEngine or rely on default constructor of Character?
+		// Character constructor initializes images to null or something?
+		// Character() calls this.currentImage = images[0] but images is null.
+		// We need to set images.
+		// We can reuse the same images for now.
+		// But CharacterManager might have different logic.
+		// Let's defer image loading to GameEngine or handle it here if possible.
+		// gameObjects.add(opponentCharacter);
+	}
+
+	public void addOpponentToGameObjects() {
+		if (opponentCharacter != null && !gameObjects.contains(opponentCharacter)) {
+			gameObjects.add(opponentCharacter);
+		}
+	}
+
+	public Character getOpponentCharacter() {
+		return opponentCharacter;
+	}
+
+	public void updateOpponent(int x, int y, boolean isDead) {
+		if (opponentCharacter != null) {
+			opponentCharacter.setPosX(x);
+			opponentCharacter.setPosY(y);
+			// Handle death logic or score if needed
+		}
+	}
+
+	public void setSeed(long seed) {
+		rand = new Random(seed);
+	}
+
+    public void reset(long seed) {
+        this.rand = new Random(seed);
+        this.gameObjects.clear();
+        this.gameObjects.add(gameCharacter);
+
+        gameCharacter.setPosX(CHARACTER_INITIAL_POSX);
+        gameCharacter.setPosY(CHARACTER_INITIAL_POSY);
+        gameCharacter.setVerticalVelocity(0);
+        gameCharacter.setHorizontalVelocity(0);
+        gameCharacter.setScore(0);
+
+        if (opponentCharacter != null) {
+            // Add opponent to gameObjects but ensure CollisionManager ignores it
+		this.gameObjects.add(opponentCharacter);
+            opponentCharacter.setPosX(CHARACTER_INITIAL_POSX + 50);
+            opponentCharacter.setPosY(CHARACTER_INITIAL_POSY);
+        }
+
+        this.level = LEVEL_INITIAL;
+        this.altitude = ALTITUDE_INITIAL;
+        this.gravity = GRAVITY_INITIAL;
+        this.passedLevel = 0;
+        this.barExtendTaken = false;
+        this.speedIncreaseBonusTaken = false;
+        this.slowIncreaseBonusTaken = false;
+
+        Base base = new Base();
+        base.setPosX(BASE_INITIAL_POSX);
+        base.setPosY(BASE_INITIAL_POSY);
+        gameObjects.add(base);
+    }
+
+
+	public boolean isMultiplayer() {
+		return isMultiplayer;
 	}
 
     /**
