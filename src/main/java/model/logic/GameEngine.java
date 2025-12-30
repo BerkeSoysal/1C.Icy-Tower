@@ -104,6 +104,10 @@ public class GameEngine {
 		return instance;
 	}
 
+    public static void setEngineNull() {
+        instance = null;
+    }
+
 	/**
 	 * Default constructor
 	 */
@@ -559,4 +563,10 @@ public class GameEngine {
 	public void setPrevBarIncreaseGameSpeed(int prevBarId) {
 		barIdIncreaseSpeed = prevBarId;
 	}
+
+    public void resetForMultiplayer(long seed) {
+        Map.getInstance().reset(seed);
+        // Re-generate initial platforms
+        mapGenerator.createNextGameObjects();
+    }
 }

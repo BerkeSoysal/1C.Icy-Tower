@@ -17,6 +17,7 @@ public class MainController {
     private static Scene creditsScene;
     private static Scene exitScene;
     private static Scene difficultyScene;
+    private static Scene multiplayerMenuScene;
     // Setting scenes
     private static Scene soundSettingsScene;
     private static Scene buttonSettingsScene;
@@ -135,6 +136,14 @@ public class MainController {
 
     public static void setDifficultyScene(Scene difficultyScene) {
         MainController.difficultyScene = difficultyScene;
+    }
+
+    public static Scene getMultiplayerMenuScene() {
+        return multiplayerMenuScene;
+    }
+
+    public static void setMultiplayerMenuScene(Scene multiplayerMenuScene) {
+        MainController.multiplayerMenuScene = multiplayerMenuScene;
     }
 
 }

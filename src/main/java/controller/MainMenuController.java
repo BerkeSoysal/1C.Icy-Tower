@@ -87,6 +87,11 @@ public class MainMenuController extends MainController {
 
     }
 
+    public void openMultiplayerScene(ActionEvent actionEvent){
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.setScene(MainController.getInstance().getMultiplayerMenuScene());
+    }
+
 
 
 }
