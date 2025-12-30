@@ -62,6 +62,10 @@ public class FileManager {
 
 
     	File file = new File(HIGH_SCORE_FILE);
+		if (!file.exists()) {
+			resetHighScores();
+			return;
+		}
 		FileReader fileReader = new FileReader(file);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 
