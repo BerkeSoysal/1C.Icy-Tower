@@ -313,7 +313,7 @@ public class Map {
 					bar.move();
 				}
 			}
-			if(obj.getPosY() < -130){
+			if(obj.getPosY() < -130 && obj != opponentCharacter){
 				iter.remove();
 			}
 			else {

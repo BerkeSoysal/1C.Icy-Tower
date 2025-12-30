@@ -191,6 +191,8 @@ public class GameFrame {
                 myPacket.movingRight = myChar.isMovingRight();
                 myPacket.standing = myChar.isStanding();
                 myPacket.comboJumping = myChar.isComboJumping();
+                myPacket.barExtendTaken = Map.getInstance().isBarExtendTaken();
+                myPacket.barExtendTakenBar = Map.getInstance().getBarExtendTakenBar();
                 // Check if I died
                 if (GameEngine.getInstance().getMap().gameOver()) {
                     myPacket.isDead = true;
@@ -203,6 +205,13 @@ public class GameFrame {
                     if (!remotePacket.isInit) {
                         Map.getInstance().updateOpponent(remotePacket.x, remotePacket.y, remotePacket.altitude, remotePacket.isDead,
                                 remotePacket.movingLeft, remotePacket.movingRight, remotePacket.standing, remotePacket.comboJumping);
+
+                        if (remotePacket.barExtendTaken) {
+                            if (!Map.getInstance().isBarExtendTaken() || remotePacket.barExtendTakenBar > Map.getInstance().getBarExtendTakenBar()) {
+                                Map.getInstance().extendBar(remotePacket.barExtendTakenBar);
+                            }
+                        }
+
                         if (remotePacket.isDead) {
                             // Opponent died, we win!
                              System.out.println("Opponent died. You Win!");

@@ -11,6 +11,8 @@ public class GameStatePacket implements Serializable {
     public int score;
     public boolean isDead;
     public boolean movingLeft, movingRight, standing, comboJumping;
+    public boolean barExtendTaken;
+    public int barExtendTakenBar;
     public long seed; // Only sent by host initially
     public boolean isInit; // Flag to check if it's init packet
 
