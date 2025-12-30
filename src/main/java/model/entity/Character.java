@@ -169,6 +169,13 @@ public class Character extends GameObject {
         this.currentAccelleration = currentAccelleration;
     }
 
+    public void setAnimationState(boolean movingLeft, boolean movingRight, boolean standing, boolean comboJumping) {
+        this.movingLeft = movingLeft;
+        this.movingRight = movingRight;
+        this.standing = standing;
+        this.comboJumping = comboJumping;
+    }
+
     public void accelerate(){
 	    if(isMovingRight() && isMovingLeft()){
 	        setHorizontalVelocity(0);

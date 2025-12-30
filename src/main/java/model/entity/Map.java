@@ -168,10 +168,12 @@ public class Map {
 		return opponentCharacter;
 	}
 
-	public void updateOpponent(int x, int y, boolean isDead) {
+	public void updateOpponent(int x, int y, int altitude, boolean isDead, boolean movingLeft, boolean movingRight, boolean standing, boolean comboJumping) {
 		if (opponentCharacter != null) {
+            int relativeY = (y + altitude) - this.altitude;
 			opponentCharacter.setPosX(x);
-			opponentCharacter.setPosY(y);
+			opponentCharacter.setPosY(relativeY);
+            opponentCharacter.setAnimationState(movingLeft, movingRight, standing, comboJumping);
 			// Handle death logic or score if needed
 		}
 	}
