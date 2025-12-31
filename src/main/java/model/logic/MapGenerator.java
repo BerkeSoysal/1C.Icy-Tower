@@ -20,7 +20,7 @@ public class MapGenerator {
      */
 	public void createNextGameObjects(){
         for(int i = 0; i < BARS_TO_BE_CREATED; i++){
-           if(Math.random() < BONUS_CREATING_RANDOM){
+           if(map.getNextRandomDouble() < BONUS_CREATING_RANDOM){
                 map.createCollectible();
             }
             map.setLevel(map.getLevel() + 1);

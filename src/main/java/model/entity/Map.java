@@ -262,7 +262,7 @@ public class Map {
 	 */
 	public void createCollectible(){
 
-		int bonustype = (int)(Math.random()*5);
+		int bonustype = rand.nextInt(5);
 		Collectible bonus = new Collectible();
 		switch (bonustype)
 		{
@@ -275,11 +275,15 @@ public class Map {
 		}
 
 		bonus.setPosY(120 * level - altitude);
-		bonus.setPosX((int)(Math.random()*590) + 50);
+		bonus.setPosX(rand.nextInt(590) + 50);
 
 		gameObjects.add(bonus);
 
 	}
+
+    public double getNextRandomDouble() {
+        return rand.nextDouble();
+    }
 
 	/**
 	 * Creates a level that fits in the length of screen

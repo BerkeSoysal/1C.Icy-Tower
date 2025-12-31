@@ -1,11 +1,7 @@
 package test;
 
-import java.awt.GraphicsEnvironment;
-import javafx.embed.swing.JFXPanel;
 import model.logic.SoundManager;
 import org.junit.Rule;
-import org.junit.jupiter.api.Assumptions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
@@ -14,12 +10,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SoundManagerTest {
-
-    @BeforeAll
-    static void initJFX() {
-        Assumptions.assumeFalse(GraphicsEnvironment.isHeadless(), "Skipping JavaFX tests in headless environment");
-        new JFXPanel(); // Initializes the JavaFX toolkit
-    }
 
     @Test
     void getInstance() {
